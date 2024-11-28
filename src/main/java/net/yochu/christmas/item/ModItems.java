@@ -13,7 +13,7 @@ import net.yochu.christmas.ChristmasWeapons;
 
 public class ModItems {
     public static final Item CANDY_CANE_SWORD = registerItem("candy_cane_sword",
-            new SwordItem(ModToolMaterial.CHRISTMAS, 10, 2f, new FabricItemSettings()));
+            new SwordItem(ModToolMaterial.CHRISTMAS, 5, 1f, new FabricItemSettings()));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(CANDY_CANE_SWORD);
