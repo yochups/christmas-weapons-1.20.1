@@ -1,13 +1,13 @@
 package net.yochu.christmas.item;
 
-import net.fabricmc.yarn.constants.MiningLevels;
+import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 
 import java.util.function.Supplier;
 
 public enum ModToolMaterial implements ToolMaterial {
-    CHRISTMAS(5, 3000, 9.0f, 4.0f, 30, () -> null);
+    CHRISTMAS(5, 3000, 9.0f, 4.0f, 30, () -> Ingredient.ofItems(Items.SUGAR));
 
     private final int miningLevel;
     private final int itemDurability;
@@ -53,6 +53,6 @@ public enum ModToolMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return this.repairIngredient;
+        return this.repairIngredient.get();
     }
 }
