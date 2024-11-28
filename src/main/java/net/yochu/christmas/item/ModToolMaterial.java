@@ -7,7 +7,7 @@ import net.minecraft.recipe.Ingredient;
 import java.util.function.Supplier;
 
 public enum ModToolMaterial implements ToolMaterial {
-    CHRISTMAS(5, 3000, 1.0f, 4.0f, 30, () -> Ingredient.ofItems(Items.SUGAR));
+    CHRISTMAS(5, 3000, 4.5f, 4.0f, 30, () -> Ingredient.ofItems(Items.SUGAR));
 
     private final int miningLevel;
     private final int itemDurability;
