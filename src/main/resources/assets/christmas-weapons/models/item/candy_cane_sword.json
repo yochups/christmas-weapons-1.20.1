@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"texture":{
-		"layer0": "christmas-weapons:item/candycane_sword"
+		"layer0": "christmas-weapons:item/candy_cane_sword"
 	},
 	"texture_size": [32, 32],
 	"elements": [

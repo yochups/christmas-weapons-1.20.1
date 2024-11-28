@@ -1,3 +1,5 @@
 {
-  "item.christmas-weapons.candycane_sword": "Candy Cane Sword"
+  "item.christmas-weapons.candy_cane_sword": "Candy Cane Sword",
+
+  "itemgroup.weapons": "Christmas Weapons"
 }
