@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "christmas-weapons",
+	"version": "${version}",
+	"name": "christmas weapons",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Yochu"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/christmas-weapons/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.yochu.christmas.ChristmasWeapons"
+		],
+		"client": [
+			"net.yochu.christmas.ChristmasWeaponsClient"
+		],
+		"fabric-datagen": [
+			"net.yochu.christmas.ChristmasWeaponsDataGenerator"
+		]
+	},
+	"mixins": [
+		"christmas-weapons.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
