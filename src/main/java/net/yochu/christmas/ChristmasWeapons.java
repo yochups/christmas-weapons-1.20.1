@@ -2,7 +2,8 @@ package net.yochu.christmas;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.yochu.christmas.item.ModItems;
+import net.yochu.christmas.registry.ModItemGroups;
+import net.yochu.christmas.registry.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

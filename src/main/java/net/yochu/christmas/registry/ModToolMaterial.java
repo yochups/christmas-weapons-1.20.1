@@ -1,4 +1,4 @@
-package net.yochu.christmas.item;
+package net.yochu.christmas.registry;
 
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
