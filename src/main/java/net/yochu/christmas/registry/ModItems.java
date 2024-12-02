@@ -11,16 +11,20 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.yochu.christmas.ChristmasWeapons;
+import net.yochu.christmas.item.RockItem;
 
 public class ModItems {
     public static final Item CANDY_CANE_SWORD = registerItem("candy_cane_sword",
             new SwordItem(ModToolMaterial.CHRISTMAS, 4, -2.2f, new FabricItemSettings()));
     public static final Item FROSTBITE_AXE = registerItem("frostbite_axe",
             new AxeItem(ModToolMaterial.CHRISTMAS, 5, -3f, new FabricItemSettings()));
+    public static final Item ROCK = registerItem("rock_debug",
+            new RockItem(new FabricItemSettings()));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(CANDY_CANE_SWORD);
         entries.add(FROSTBITE_AXE);
+        entries.add(ROCK);
     }
 
     private static Item registerItem(String name, Item item) {

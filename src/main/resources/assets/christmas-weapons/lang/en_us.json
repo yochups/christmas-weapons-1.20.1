@@ -1,6 +1,9 @@
 {
   "item.christmas-weapons.candy_cane_sword": "Candy Cane Sword",
   "item.christmas-weapons.frostbite_axe": "Frostbite Axe",
+  "item.christmas-weapons.rock_debug": "Rock",
 
-  "itemgroup.weapons": "Christmas Weapons"
+  "itemgroup.weapons": "Christmas Weapons",
+
+  "entity.christmas_weapons.rock_projectile": "Rock"
 }

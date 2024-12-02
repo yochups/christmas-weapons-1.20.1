@@ -2,6 +2,9 @@ package net.yochu.christmas;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
+import net.yochu.christmas.registry.ModEntities;
 import net.yochu.christmas.registry.ModItemGroups;
 import net.yochu.christmas.registry.ModItems;
 import org.slf4j.Logger;
@@ -15,5 +18,6 @@ public class ChristmasWeapons implements ModInitializer {
 	public void onInitialize() {
 		ModItemGroups.registerItemGroups();
 		ModItems.registerModItems();
+		ModEntities.registerModEntities();
 	}
 }
