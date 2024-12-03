@@ -20,7 +20,7 @@ public class RockItem extends Item {
         ItemStack itemStack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5f, 0.4f); // plays a globalSoundEvent
         if (!world.isClient) {
-            RockProjectileEntity rockProjectileEntity = new RockProjectileEntity(world, user);
+            RockProjectileEntity rockProjectileEntity = new RockProjectileEntity(user, world);
             rockProjectileEntity.setItem(itemStack);
             rockProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.0F, 1.0F);
             world.spawnEntity(rockProjectileEntity);

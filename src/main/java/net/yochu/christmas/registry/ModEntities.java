@@ -14,7 +14,8 @@ public class ModEntities {
     public static final EntityType<RockProjectileEntity> ROCK_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(ChristmasWeapons.MOD_ID, "rock_projectile"),
             FabricEntityTypeBuilder.<RockProjectileEntity>create(SpawnGroup.MISC, RockProjectileEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+                    .build());
 
     public static void registerModEntities() {
         ChristmasWeapons.LOGGER.info("Registering Entities for " + ChristmasWeapons.MOD_ID);

@@ -3,7 +3,7 @@
   "package": "net.yochu.christmas.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ExampleMixin"
+    "ExampleMixin",
   ],
   "injectors": {
     "defaultRequire": 1
