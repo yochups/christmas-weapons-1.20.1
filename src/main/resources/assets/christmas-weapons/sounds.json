@@ -1,0 +1,10 @@
+{
+  "shockwave": {
+    "sounds": [
+      "christmas-weapons:entity/shockwave1",
+      "christmas-weapons:entity/shockwave2",
+      "christmas-weapons:entity/shockwave3"
+    ],
+    "subtitle": "sounds.christmas-weapons.shockwave"
+  }
+}

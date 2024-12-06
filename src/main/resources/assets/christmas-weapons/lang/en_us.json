@@ -5,5 +5,9 @@
 
   "itemgroup.weapons": "Christmas Weapons",
 
-  "entity.christmas_weapons.rock_projectile": "Rock"
+  "entity.christmas_weapons.rock_projectile": "Rock",
+
+  "sounds.christmas-weapons.shockwave": "Shockwave",
+
+  "death.attack.rock_damage_type": "%1$s was crushed by a rock"
 }
