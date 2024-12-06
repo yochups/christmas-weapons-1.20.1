@@ -1,21 +1,32 @@
 package net.yochu.christmas.entity.custom;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.particle.*;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.yochu.christmas.registry.ModEntities;
-import net.yochu.christmas.registry.ModItems;
+import net.yochu.christmas.registry.ModParticles;
+import net.yochu.christmas.registry.ModSounds;
+
+import java.util.Random;
 
 public class RockProjectileEntity extends ThrownItemEntity {
 
@@ -29,7 +40,7 @@ public class RockProjectileEntity extends ThrownItemEntity {
 
     @Override
     protected Item getDefaultItem() {
-        return ModItems.ROCK;
+        return Blocks.OAK_LEAVES.asItem();
     }
 
     @Override
@@ -38,8 +49,33 @@ public class RockProjectileEntity extends ThrownItemEntity {
     }
 
     @Override
-    public void updateRotation() {
+    public void onSpawnPacket(EntitySpawnS2CPacket packet) {
+        super.onSpawnPacket(packet);
+    }
 
+    @Environment(EnvType.CLIENT)
+    private ParticleEffect getParticleParameters() {
+        ItemStack itemStack = this.getItem();
+        return (ParticleEffect)(itemStack.isEmpty() ? ParticleTypes.BLOCK : new ItemStackParticleEffect(ParticleTypes.ITEM, itemStack));
+    }
+
+    @Environment(EnvType.CLIENT)
+    public void handleStatus(byte status) {
+        if (status == 3) {
+            ParticleEffect particleEffect = this.getParticleParameters();
+
+            Random random = new Random();
+            this.getWorld().addParticle(ModParticles.SHOCKWAVE, this.getX(), this.getY(), this.getZ(), 0D, 0D, 0D);
+            for(int i = 0; i < 30; ++i) {
+                int offset = 6; //this is divided by 10
+                float xoffset = (float) (random.nextInt(-offset, offset));
+                float yoffset = (float) (random.nextInt(-offset, offset));
+                float zoffset = (float) (random.nextInt(-offset, offset));
+
+                float yvel = (float) (random.nextInt(0, 2));
+                this.getWorld().addParticle(particleEffect, this.getX() + (xoffset / 10), this.getY() + (yoffset / 10), this.getZ() + (zoffset / 10), ((xoffset / 5) / 10), (yvel / 10), ((zoffset / 5) / 10));
+            }
+        }
     }
 
     @Override
@@ -47,9 +83,22 @@ public class RockProjectileEntity extends ThrownItemEntity {
         Entity entity = entityHitResult.getEntity();
 
         if (entity instanceof LivingEntity livingEntity) {
-            livingEntity.playSound(SoundEvents.BLOCK_ROOTED_DIRT_BREAK, 1f, 1f);
+            this.getWorld().sendEntityStatus(this, (byte)3);
+            Item item = this.getItem().getItem();
+            if (item instanceof BlockItem blockItem) {
+                Block block = blockItem.getBlock();
+                BlockState blockState = block.getDefaultState();
+                BlockSoundGroup soundGroup = blockState.getSoundGroup();
+                SoundEvent breakSound = soundGroup.getBreakSound();
+
+                this.playSound(breakSound, 1f, 0.8f);
+                this.playSound(ModSounds.SHOCKWAVE, 0.6f, 1f);
+            }
+            final DynamicRegistryManager registryManager = entity.getWorld().getRegistryManager();
+            entity.damage(getWorld().getDamageSources().fallingBlock(this.getOwner()),1.0f);
         }
 
+        this.discard();
         super.onEntityHit(entityHitResult);
     }
 
@@ -57,10 +106,20 @@ public class RockProjectileEntity extends ThrownItemEntity {
     protected void onBlockHit(BlockHitResult blockHitResult) {
         if (!this.getWorld().isClient) {
             this.getWorld().sendEntityStatus(this, (byte)3);
+
+            Item item = this.getItem().getItem();
+            if (item instanceof BlockItem blockItem) {
+                Block block = blockItem.getBlock();
+                BlockState blockState = block.getDefaultState();
+                BlockSoundGroup soundGroup = blockState.getSoundGroup();
+                SoundEvent breakSound = soundGroup.getBreakSound();
+
+                this.playSound(breakSound, 1f, 0.8f);
+                this.playSound(ModSounds.SHOCKWAVE, 0.6f, 1f);
+            }
         }
 
         this.discard();
         super.onBlockHit(blockHitResult);
     }
-
 }
