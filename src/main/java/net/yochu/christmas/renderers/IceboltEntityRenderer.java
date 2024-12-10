@@ -22,20 +22,20 @@ import org.joml.Quaternionf;
 import org.joml.Quaternionfc;
 
 @Environment(EnvType.CLIENT)
-public class VelocityItemEntityRenderer<T extends Entity & FlyingItemEntity> extends EntityRenderer<T> {
+public class IceboltEntityRenderer<T extends Entity & FlyingItemEntity> extends EntityRenderer<T> {
     private static final float MIN_DISTANCE = 12.25F;
     private final ItemRenderer itemRenderer;
     private final float scale;
     private final boolean lit;
 
-    public VelocityItemEntityRenderer(EntityRendererFactory.Context ctx, float scale, boolean lit) {
+    public IceboltEntityRenderer(EntityRendererFactory.Context ctx, float scale, boolean lit) {
         super(ctx);
         this.itemRenderer = ctx.getItemRenderer();
         this.scale = scale;
         this.lit = lit;
     }
 
-    public VelocityItemEntityRenderer(EntityRendererFactory.Context context) {
+    public IceboltEntityRenderer(EntityRendererFactory.Context context) {
         this(context, 1.0F, false);
     }
 
@@ -48,11 +48,11 @@ public class VelocityItemEntityRenderer<T extends Entity & FlyingItemEntity> ext
     public void render(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         if (entity.age >= 2 || !(this.dispatcher.camera.getFocusedEntity().squaredDistanceTo(entity) < 12.25)) {
             matrices.push();
-            matrices.scale(this.scale*3f, this.scale*3f, this.scale*3f);
+            matrices.scale(this.scale/3, this.scale/3, this.scale/3);
             matrices.multiply(
-                    RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevYaw, entity.getYaw()) - 90.0F)
+                    RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevYaw, entity.getYaw() - 90.0F))
             );
-            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.lerp(tickDelta/2, entity.prevPitch, entity.getPitch())));
+            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevPitch, entity.getPitch())));
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
             this.itemRenderer
                     .renderItem(

@@ -8,6 +8,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -15,14 +17,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.network.packet.s2c.play.GameStateChangeS2CPacket;
 import net.minecraft.particle.*;
 import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 import net.yochu.christmas.registry.ModEntities;
+import net.yochu.christmas.registry.ModItems;
 import net.yochu.christmas.registry.ModParticles;
 import net.yochu.christmas.registry.ModSounds;
 
@@ -56,6 +61,9 @@ public class RockProjectileEntity extends ThrownItemEntity {
     @Environment(EnvType.CLIENT)
     private ParticleEffect getParticleParameters() {
         ItemStack itemStack = this.getItem();
+        if (itemStack == null) {
+            itemStack = getDefaultItem().getDefaultStack();
+        }
         return (ParticleEffect)(itemStack.isEmpty() ? ParticleTypes.BLOCK : new ItemStackParticleEffect(ParticleTypes.ITEM, itemStack));
     }
 
@@ -78,25 +86,43 @@ public class RockProjectileEntity extends ThrownItemEntity {
         }
     }
 
+    protected void onHit(LivingEntity target) {
+    }
+
     @Override
     public void onEntityHit(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
 
-        if (entity instanceof LivingEntity livingEntity) {
-            this.getWorld().sendEntityStatus(this, (byte)3);
-            Item item = this.getItem().getItem();
-            if (item instanceof BlockItem blockItem) {
-                Block block = blockItem.getBlock();
-                BlockState blockState = block.getDefaultState();
-                BlockSoundGroup soundGroup = blockState.getSoundGroup();
-                SoundEvent breakSound = soundGroup.getBreakSound();
-
-                this.playSound(breakSound, 1f, 0.8f);
-                this.playSound(ModSounds.SHOCKWAVE, 0.6f, 1f);
+        Entity entity2 = this.getOwner();
+        DamageSource damageSource;
+        if (entity2 == null) {
+            damageSource = this.getDamageSources().fallingBlock(this);
+        } else if (entity2 instanceof PlayerEntity) {
+            damageSource = this.getDamageSources().playerAttack((PlayerEntity) entity2);
+        } else {
+            damageSource = this.getDamageSources().mobAttack((LivingEntity) this.getOwner());
+            if (entity2 instanceof LivingEntity) {
+                ((LivingEntity)entity2).onAttacking(entity);
             }
-            final DynamicRegistryManager registryManager = entity.getWorld().getRegistryManager();
-            entity.damage(getWorld().getDamageSources().fallingBlock(this.getOwner()),1.0f);
         }
+
+        if (entity instanceof LivingEntity livingEntity) {
+            this.onHit(livingEntity);
+            entity.damage(damageSource, 2.5f);
+            //entity.damage(getWorld().getDamageSources().fallingBlock(this.getOwner()),2.5f+item.getDefaultStack().getDamage());
+        }
+
+        this.getWorld().sendEntityStatus(this, (byte)3);
+        Item item = this.getItem().getItem();
+        if (item instanceof BlockItem blockItem) {
+            Block block = blockItem.getBlock();
+            BlockState blockState = block.getDefaultState();
+            BlockSoundGroup soundGroup = blockState.getSoundGroup();
+            SoundEvent breakSound = soundGroup.getBreakSound();
+
+            this.playSound(breakSound, 1f, 0.8f);
+        }
+        this.playSound(ModSounds.SHOCKWAVE, 0.6f, 1f);
 
         this.discard();
         super.onEntityHit(entityHitResult);
@@ -115,8 +141,8 @@ public class RockProjectileEntity extends ThrownItemEntity {
                 SoundEvent breakSound = soundGroup.getBreakSound();
 
                 this.playSound(breakSound, 1f, 0.8f);
-                this.playSound(ModSounds.SHOCKWAVE, 0.6f, 1f);
             }
+            this.playSound(ModSounds.SHOCKWAVE, 0.6f, 1f);
         }
 
         this.discard();

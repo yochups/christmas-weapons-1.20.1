@@ -11,6 +11,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.yochu.christmas.ChristmasWeapons;
+import net.yochu.christmas.item.FrostBowItem;
+import net.yochu.christmas.item.IceboltItem;
 import net.yochu.christmas.item.RockItem;
 
 public class ModItems {
@@ -20,11 +22,16 @@ public class ModItems {
             new AxeItem(ModToolMaterial.CHRISTMAS, 5, -3f, new FabricItemSettings()));
     public static final Item ROCK = registerItem("rock_debug",
             new RockItem(new FabricItemSettings()));
+    public static final Item ICEBOLT = registerItem("icebolt_debug",
+            new IceboltItem(new FabricItemSettings()));
+    public static final Item FROSTBOW = registerItem("frostbow",
+            new FrostBowItem(new FabricItemSettings().maxDamage(1024)));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(CANDY_CANE_SWORD);
         entries.add(FROSTBITE_AXE);
         entries.add(ROCK);
+        entries.add(ICEBOLT);
     }
 
     private static Item registerItem(String name, Item item) {

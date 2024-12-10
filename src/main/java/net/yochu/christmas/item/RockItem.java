@@ -31,7 +31,7 @@ public class RockItem extends Item {
 
         ItemStack itemStack = user.getMainHandStack();
 
-        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_EGG_THROW, SoundCategory.NEUTRAL, 0.5f, 0.4f); // plays a globalSoundEvent
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5f, 0.4f); // plays a globalSoundEvent
         if (!world.isClient) {
             RockProjectileEntity rockProjectileEntity = new RockProjectileEntity(user, world);
             rockProjectileEntity.setPosition(rockProjectileEntity.getX(), rockProjectileEntity.getY()-0.4D,rockProjectileEntity.getZ());
@@ -41,9 +41,6 @@ public class RockItem extends Item {
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));
-        if (!user.getAbilities().creativeMode) {
-            itemStack.decrement(1);
-        }
 
         return TypedActionResult.success(itemStack, world.isClient());
     }

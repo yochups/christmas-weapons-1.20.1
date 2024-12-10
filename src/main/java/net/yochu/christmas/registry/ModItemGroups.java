@@ -18,6 +18,8 @@ public class ModItemGroups {
                         entries.add(ModItems.CANDY_CANE_SWORD);
                         entries.add(ModItems.FROSTBITE_AXE);
                         entries.add(ModItems.ROCK);
+                        entries.add(ModItems.ICEBOLT);
+                        entries.add(ModItems.FROSTBOW);
 
                     }).build());
 

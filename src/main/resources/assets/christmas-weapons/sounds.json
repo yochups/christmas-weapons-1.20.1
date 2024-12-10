@@ -6,5 +6,11 @@
       "christmas-weapons:entity/shockwave3"
     ],
     "subtitle": "sounds.christmas-weapons.shockwave"
+  },
+  "scream": {
+    "sounds": [
+      "christmas-weapons:scream"
+    ],
+    "subtitle": "sounds.christmas-weapons.scream"
   }
 }
