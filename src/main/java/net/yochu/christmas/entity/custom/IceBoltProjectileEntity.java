@@ -57,10 +57,7 @@ public class IceBoltProjectileEntity extends ThrownItemEntity {
 
     @Environment(EnvType.CLIENT)
     private ParticleEffect getParticleParameters() {
-        ItemStack itemStack = this.getItem();
-        if (itemStack == null) {
-            itemStack = getDefaultItem().getDefaultStack();
-        }
+        ItemStack itemStack = getDefaultItem().getDefaultStack();
         return (ParticleEffect)(itemStack.isEmpty() ? ParticleTypes.BLOCK : new ItemStackParticleEffect(ParticleTypes.ITEM, itemStack));
     }
 
@@ -76,13 +73,13 @@ public class IceBoltProjectileEntity extends ThrownItemEntity {
 
             Random random = new Random();
             for(int i = 0; i < 30; ++i) {
-                int offset = 6; //this is divided by 10
+                int offset = 3; //this is divided by 10
                 float xoffset = (float) (random.nextInt(-offset, offset));
                 float yoffset = (float) (random.nextInt(-offset, offset));
                 float zoffset = (float) (random.nextInt(-offset, offset));
 
                 float yvel = (float) (random.nextInt(0, 2));
-                this.getWorld().addParticle(particleEffect, this.getX() + (xoffset / 10), this.getY() + (yoffset / 10), this.getZ() + (zoffset / 10), ((xoffset / 5) / 10), (yvel / 10), ((zoffset / 5) / 10));
+                this.getWorld().addParticle(particleEffect, this.getX() + (xoffset / 10), this.getY() + (yoffset / 10), this.getZ() + (zoffset / 10), ((xoffset / 2) / 10), (yvel / 10), ((zoffset / 2) / 10));
             }
         }
     }

@@ -7,6 +7,7 @@ import net.yochu.christmas.particle.custom.FrostbiteSlashParticle;
 import net.yochu.christmas.particle.custom.ShockwaveParticle;
 import net.yochu.christmas.registry.ModEntities;
 import net.yochu.christmas.registry.ModParticles;
+import net.yochu.christmas.renderers.IceboltEntityRenderer;
 import net.yochu.christmas.renderers.VelocityItemEntityRenderer;
 import net.yochu.christmas.util.ModModelPredicateProvider;
 
@@ -14,7 +15,7 @@ public class ChristmasWeaponsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         EntityRendererRegistry.register(ModEntities.ROCK_PROJECTILE, VelocityItemEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.ICEBOLT_PROJECTILE, VelocityItemEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.ICEBOLT_PROJECTILE, IceboltEntityRenderer::new);
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.FROSTBITE_SWEEP_ATTACK, FrostbiteSlashParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.SHOCKWAVE, ShockwaveParticle.Factory::new);

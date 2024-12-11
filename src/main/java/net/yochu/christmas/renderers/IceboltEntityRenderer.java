@@ -48,9 +48,9 @@ public class IceboltEntityRenderer<T extends Entity & FlyingItemEntity> extends 
     public void render(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         if (entity.age >= 2 || !(this.dispatcher.camera.getFocusedEntity().squaredDistanceTo(entity) < 12.25)) {
             matrices.push();
-            matrices.scale(this.scale/3, this.scale/3, this.scale/3);
+            matrices.scale(this.scale, this.scale, this.scale);
             matrices.multiply(
-                    RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevYaw, entity.getYaw() - 90.0F))
+                    RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevYaw, entity.getYaw()) - 90.0F)
             );
             matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevPitch, entity.getPitch())));
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
