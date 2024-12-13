@@ -28,12 +28,7 @@ public abstract class ModelLoaderMixin {
     }
 
     @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/model/ModelLoader;addModel(Lnet/minecraft/client/util/ModelIdentifier;)V", ordinal = 3, shift = At.Shift.AFTER))
-    public void addFrostAxe(BlockColors blockColors, Profiler profiler, Map<Identifier, JsonUnbakedModel> jsonUnbakedModels, Map<Identifier, List<ModelLoader.SourceTrackedData>> blockStates, CallbackInfo ci) {
-        this.addModel(new ModelIdentifier(ChristmasWeapons.MOD_ID, "frostbite_axe_in_hand", "inventory"));
-    }
-
-    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/model/ModelLoader;addModel(Lnet/minecraft/client/util/ModelIdentifier;)V", ordinal = 3, shift = At.Shift.AFTER))
-    public void addFrostBow(BlockColors blockColors, Profiler profiler, Map<Identifier, JsonUnbakedModel> jsonUnbakedModels, Map<Identifier, List<ModelLoader.SourceTrackedData>> blockStates, CallbackInfo ci) {
-        this.addModel(new ModelIdentifier(ChristmasWeapons.MOD_ID, "frostbow_in_hand", "inventory"));
+    public void addPineGrenade(BlockColors blockColors, Profiler profiler, Map<Identifier, JsonUnbakedModel> jsonUnbakedModels, Map<Identifier, List<ModelLoader.SourceTrackedData>> blockStates, CallbackInfo ci) {
+        this.addModel(new ModelIdentifier(ChristmasWeapons.MOD_ID, "pine_grenade_in_hand", "inventory"));
     }
 }

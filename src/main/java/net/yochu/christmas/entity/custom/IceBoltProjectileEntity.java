@@ -10,6 +10,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -84,6 +85,27 @@ public class IceBoltProjectileEntity extends ThrownItemEntity {
         }
     }
 
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (this.getWorld().isClient) {
+            ParticleEffect particleEffect = this.getParticleParameters();
+
+            Random random = new Random();
+            for(int i = 0; i < 1; ++i) {
+                //int offset = 3; //this is divided by 10
+                //float xvel = (float) (random.nextInt(-offset, offset));
+                //float zvel = (float) (random.nextInt(-offset, offset));
+                float xvel = (float) this.getVelocity().x;
+                float yvel = (float) (random.nextInt(0, 2));
+                float zvel = (float) this.getVelocity().z;
+
+                this.getWorld().addParticle(particleEffect, this.getX(), this.getY(), this.getZ(), (xvel / 10), (yvel / 10), (zvel / 10));
+            }
+        }
+    }
+
     protected void onHit(LivingEntity target) {
     }
 
@@ -140,7 +162,7 @@ public class IceBoltProjectileEntity extends ThrownItemEntity {
             //entity.damage(getWorld().getDamageSources().fallingBlock(this.getOwner()),2.5f+item.getDefaultStack().getDamage());
         }
 
-        this.discard();
+        this.remove(RemovalReason.DISCARDED);
         super.onEntityHit(entityHitResult);
     }
 
@@ -153,7 +175,7 @@ public class IceBoltProjectileEntity extends ThrownItemEntity {
             //this.playSound(ModSounds.SHOCKWAVE, 0.6f, 1f);
         }
 
-        this.discard();
+        this.remove(RemovalReason.DISCARDED);
         super.onBlockHit(blockHitResult);
     }
 

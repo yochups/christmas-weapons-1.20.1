@@ -1,0 +1,84 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "christmas-weapons:item/pine_grenade_in_hand",
+		"particle": "christmas-weapons:item/pine_grenade_in_hand"
+	},
+	"elements": [
+		{
+			"from": [7, 0, 7],
+			"to": [9, 2, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 3.375, 8]},
+			"faces": {
+				"north": {"uv": [3, 6, 5, 8], "texture": "#0"},
+				"east": {"uv": [6, 3, 8, 5], "texture": "#0"},
+				"south": {"uv": [5, 6, 7, 8], "texture": "#0"},
+				"west": {"uv": [7, 5, 9, 7], "texture": "#0"},
+				"up": {"uv": [9, 9, 7, 7], "texture": "#0"},
+				"down": {"uv": [5, 8, 3, 10], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7.25, 5, 7.25],
+			"to": [8.75, 5.5, 8.75],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 3.375, 8]},
+			"faces": {
+				"north": {"uv": [9, 2, 11, 3], "texture": "#0"},
+				"east": {"uv": [9, 5, 11, 6], "texture": "#0"},
+				"south": {"uv": [9, 6, 11, 7], "texture": "#0"},
+				"west": {"uv": [7, 9, 9, 10], "texture": "#0"},
+				"up": {"uv": [10, 5, 8, 3], "texture": "#0"},
+				"down": {"uv": [7, 8, 5, 10], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 5.5, 7],
+			"to": [9, 6, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 3.375, 8]},
+			"faces": {
+				"north": {"uv": [9, 7, 11, 8], "texture": "#0"},
+				"east": {"uv": [9, 8, 11, 9], "texture": "#0"},
+				"south": {"uv": [9, 9, 11, 10], "texture": "#0"},
+				"west": {"uv": [2, 10, 4, 11], "texture": "#0"},
+				"up": {"uv": [2, 11, 0, 9], "texture": "#0"},
+				"down": {"uv": [11, 0, 9, 2], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6.5, 2, 6.5],
+			"to": [9.5, 5, 9.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 3.375, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 3, 3], "texture": "#0"},
+				"east": {"uv": [0, 3, 3, 6], "texture": "#0"},
+				"south": {"uv": [3, 0, 6, 3], "texture": "#0"},
+				"west": {"uv": [3, 3, 6, 6], "texture": "#0"},
+				"up": {"uv": [3, 9, 0, 6], "texture": "#0"},
+				"down": {"uv": [9, 0, 6, 3], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 4.5, 0]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 4.5, 0]
+		},
+		"firstperson_righthand": {
+			"rotation": [5, 0, 0],
+			"translation": [0, 7.25, 1.75]
+		},
+		"firstperson_lefthand": {
+			"rotation": [5, 0, 0],
+			"translation": [0, 7.25, 1.75]
+		},
+		"ground": {
+			"translation": [0, 4.5, 0]
+		},
+		"fixed": {
+			"translation": [0, 7, 0],
+			"scale": [1.35547, 1.35547, 1.35547]
+		}
+	}
+}

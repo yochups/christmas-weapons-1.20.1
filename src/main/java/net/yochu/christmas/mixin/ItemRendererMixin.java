@@ -22,19 +22,10 @@ public abstract class ItemRendererMixin {
         }
         return value;
     }
-
     @ModifyVariable(method = "renderItem", at = @At(value = "HEAD"), argsOnly = true)
-    public BakedModel useFrostBiteAxe(BakedModel value, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        if (stack.isOf(ModItems.FROSTBITE_AXE) && renderMode != ModelTransformationMode.GUI) {
-            return ((ItemRendererAccessor) this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(ChristmasWeapons.MOD_ID, "frostbite_axe_in_hand", "inventory"));
-        }
-        return value;
-    }
-
-    @ModifyVariable(method = "renderItem", at = @At(value = "HEAD"), argsOnly = true)
-    public BakedModel useFrostBow(BakedModel value, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        if (stack.isOf(ModItems.FROSTBOW) && renderMode != ModelTransformationMode.GUI) {
-            return ((ItemRendererAccessor) this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(ChristmasWeapons.MOD_ID, "frostbow_in_hand", "inventory"));
+    public BakedModel usePineGrenadeModel(BakedModel value, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        if (stack.isOf(ModItems.PINE_GRENADE) && renderMode != ModelTransformationMode.GUI) {
+            return ((ItemRendererAccessor) this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(ChristmasWeapons.MOD_ID, "pine_grenade_in_hand", "inventory"));
         }
         return value;
     }

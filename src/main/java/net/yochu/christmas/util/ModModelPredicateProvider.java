@@ -7,7 +7,7 @@ import net.yochu.christmas.registry.ModItems;
 
 public class ModModelPredicateProvider {
     public static void registerModModels() {
-        registerBow(ModItems.FROSTBOW);
+        //registerBow(ModItems.FROSTBOW);
     }
 
     private static void registerBow(Item bow) {

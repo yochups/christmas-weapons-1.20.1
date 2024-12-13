@@ -12,5 +12,13 @@
       "christmas-weapons:scream"
     ],
     "subtitle": "sounds.christmas-weapons.scream"
+  },
+  "pinecone_land": {
+    "sounds": [
+      "christmas-weapons:entity/pinecone_land_1",
+      "christmas-weapons:entity/pinecone_land_2",
+      "christmas-weapons:entity/pinecone_land_3"
+    ],
+    "subtitle": "sounds.christmas-weapons.pinecone_land"
   }
 }

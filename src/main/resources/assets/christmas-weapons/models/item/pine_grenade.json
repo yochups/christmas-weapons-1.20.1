@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "christmas-weapons:item/pine_grenade"
+  }
+}

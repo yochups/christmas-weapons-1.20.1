@@ -16,10 +16,7 @@ public class ModItemGroups {
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.weapons"))
                     .icon(() -> new ItemStack(ModItems.CANDY_CANE_SWORD)).entries((displayContext, entries) -> {
                         entries.add(ModItems.CANDY_CANE_SWORD);
-                        entries.add(ModItems.FROSTBITE_AXE);
-                        entries.add(ModItems.ROCK);
-                        entries.add(ModItems.ICEBOLT);
-                        entries.add(ModItems.FROSTBOW);
+                        entries.add(ModItems.PINE_GRENADE);
 
                     }).build());
 

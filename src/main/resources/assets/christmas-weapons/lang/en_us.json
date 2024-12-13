@@ -1,17 +1,18 @@
 {
   "item.christmas-weapons.candy_cane_sword": "Candy Cane Sword",
-  "item.christmas-weapons.frostbite_axe": "Frostbite Axe",
-  "item.christmas-weapons.frostbow": "Frost Bow",
   "item.christmas-weapons.rock_debug": "Rock",
   "item.christmas-weapons.icebolt_debug": "Icebolt",
+  "item.christmas-weapons.pine_grenade": "Pine Grenade",
 
   "itemgroup.weapons": "Christmas Weapons",
 
   "entity.christmas_weapons.rock_projectile": "Rock",
   "entity.christmas-weapons.icebolt_projectile": "Icebolt",
+  "entity.christmas-weapons.pine_grenade_projectile": "Pine Grenade",
 
-  "sounds.christmas-weapons.shockwave": "Impact Shockwave",
+  "sounds.christmas-weapons.shockwave": "Shockwave Impact",
   "sounds.christmas-weapons.scream": "Scream",
+  "sounds.christmas-weapons.pinecone_land": "Pinecone bounces",
 
   "death.attack.rock_damage_type": "%1$s was crushed by a rock"
 }

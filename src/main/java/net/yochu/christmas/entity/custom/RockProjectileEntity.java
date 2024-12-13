@@ -119,12 +119,14 @@ public class RockProjectileEntity extends ThrownItemEntity {
             BlockState blockState = block.getDefaultState();
             BlockSoundGroup soundGroup = blockState.getSoundGroup();
             SoundEvent breakSound = soundGroup.getBreakSound();
+            SoundEvent fallSound = soundGroup.getFallSound();
 
-            this.playSound(breakSound, 1f, 0.8f);
+            this.playSound(breakSound, 1f, 1.0f);
+            this.playSound(fallSound, 1.2f, 0.9f);
         }
-        this.playSound(ModSounds.SHOCKWAVE, 0.6f, 1f);
+        //this.playSound(ModSounds.SHOCKWAVE, 0.6f, 1f);
 
-        this.discard();
+        this.remove(RemovalReason.DISCARDED);
         super.onEntityHit(entityHitResult);
     }
 
@@ -139,13 +141,15 @@ public class RockProjectileEntity extends ThrownItemEntity {
                 BlockState blockState = block.getDefaultState();
                 BlockSoundGroup soundGroup = blockState.getSoundGroup();
                 SoundEvent breakSound = soundGroup.getBreakSound();
+                SoundEvent fallSound = soundGroup.getFallSound();
 
                 this.playSound(breakSound, 1f, 0.8f);
+                this.playSound(fallSound, 1.2f, 0.9f);
             }
-            this.playSound(ModSounds.SHOCKWAVE, 0.6f, 1f);
+            //this.playSound(ModSounds.SHOCKWAVE, 0.6f, 1f);
         }
 
-        this.discard();
+        this.remove(RemovalReason.DISCARDED);
         super.onBlockHit(blockHitResult);
     }
 }

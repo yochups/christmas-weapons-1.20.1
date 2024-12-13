@@ -9,6 +9,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.yochu.christmas.ChristmasWeapons;
 import net.yochu.christmas.entity.custom.IceBoltProjectileEntity;
+import net.yochu.christmas.entity.custom.PineGrenadeProjectileEntity;
 import net.yochu.christmas.entity.custom.RockProjectileEntity;
 
 public class ModEntities {
@@ -21,6 +22,11 @@ public class ModEntities {
             new Identifier(ChristmasWeapons.MOD_ID, "icebolt_projectile"),
             FabricEntityTypeBuilder.<IceBoltProjectileEntity>create(SpawnGroup.MISC, IceBoltProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.4f, 0.4f))
+                    .build());
+    public static final EntityType<PineGrenadeProjectileEntity> PINE_GRENADE_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(ChristmasWeapons.MOD_ID, "pine_grenade_projectile"),
+            FabricEntityTypeBuilder.<PineGrenadeProjectileEntity>create(SpawnGroup.MISC, PineGrenadeProjectileEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.4f,0.4f))
                     .build());
 
     public static void registerModEntities() {

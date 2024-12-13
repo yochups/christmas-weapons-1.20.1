@@ -9,6 +9,7 @@ import net.yochu.christmas.ChristmasWeapons;
 public class ModSounds {
     public static final SoundEvent SHOCKWAVE = registerSoundEvent("shockwave");
     public static final SoundEvent SCREAM = registerSoundEvent("scream");
+    public static final SoundEvent PINECONE_LAND = registerSoundEvent("pinecone_land");
 
     private static SoundEvent registerSoundEvent(String name) {
         Identifier id = new Identifier(ChristmasWeapons.MOD_ID, name);
