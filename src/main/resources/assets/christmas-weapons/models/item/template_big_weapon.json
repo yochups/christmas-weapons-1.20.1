@@ -15,7 +15,7 @@
       "scale": [
         1.6,
         1.6,
-        1.6
+        1.0
       ]
     },
     "thirdperson_lefthand": {
@@ -32,7 +32,7 @@
       "scale": [
         1.6,
         1.6,
-        1.6
+        1.0
       ]
     },
     "firstperson_righthand": {
@@ -49,7 +49,7 @@
       "scale": [
         1.1,
         1.1,
-        1.1
+        1.0
       ]
     },
     "firstperson_lefthand": {
@@ -66,7 +66,26 @@
       "scale": [
         1.1,
         1.1,
-        1.1
+        1.0
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        4,
+        0
+      ],
+      "scale": [
+        1.5,
+        1.5,
+        1.0
+      ]
+    },
+    "fixed": {
+      "translation": [
+        0,
+        7,
+        0
       ]
     }
   }

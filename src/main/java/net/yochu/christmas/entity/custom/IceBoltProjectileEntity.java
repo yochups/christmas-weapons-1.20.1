@@ -10,7 +10,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,7 +19,6 @@ import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -44,16 +42,6 @@ public class IceBoltProjectileEntity extends ThrownItemEntity {
 
     public IceBoltProjectileEntity(LivingEntity livingEntity, World world) {
         super(ModEntities.ICEBOLT_PROJECTILE, livingEntity, world);
-    }
-
-    @Override
-    public Packet<ClientPlayPacketListener> createSpawnPacket() {
-        return new EntitySpawnS2CPacket(this);
-    }
-
-    @Override
-    public void onSpawnPacket(EntitySpawnS2CPacket packet) {
-        super.onSpawnPacket(packet);
     }
 
     @Environment(EnvType.CLIENT)
@@ -221,5 +209,15 @@ public class IceBoltProjectileEntity extends ThrownItemEntity {
         if (j > 0) {
             this.setPunch(j);
         }
+    }
+
+    @Override
+    public Packet<ClientPlayPacketListener> createSpawnPacket() {
+        return new EntitySpawnS2CPacket(this);
+    }
+
+    @Override
+    public void onSpawnPacket(EntitySpawnS2CPacket packet) {
+        super.onSpawnPacket(packet);
     }
 }

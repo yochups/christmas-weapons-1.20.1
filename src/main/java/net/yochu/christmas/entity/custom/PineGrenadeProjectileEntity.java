@@ -8,6 +8,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -24,7 +27,7 @@ public class PineGrenadeProjectileEntity extends ThrownItemEntity {
     private static final float SPIN_SPEED = 10.0f;
     private int ticksExisted = 0;
     private static final int EXPLOSION_DELAY = 40; // 2 seconds (40 ticks)
-    private static final float BOUNCE_DAMPEN = 0.6f;
+    private static final float BOUNCE_DAMPEN = 0.7f;
 
     public PineGrenadeProjectileEntity(EntityType<? extends ThrownItemEntity> type, World world) {
         super(type, world);
@@ -61,6 +64,16 @@ public class PineGrenadeProjectileEntity extends ThrownItemEntity {
 
     public float getSpinAngle() {
         return spinAngle;
+    }
+
+    @Override
+    public Packet<ClientPlayPacketListener> createSpawnPacket() {
+        return new EntitySpawnS2CPacket(this);
+    }
+
+    @Override
+    public void onSpawnPacket(EntitySpawnS2CPacket packet) {
+        super.onSpawnPacket(packet);
     }
 
     @Override
@@ -104,7 +117,7 @@ public class PineGrenadeProjectileEntity extends ThrownItemEntity {
     private void triggerExplosion() {
         // Create the explosion at the grenade's position
         BlockPos pos = new BlockPos((int) this.getX(), (int) this.getY(), (int) this.getZ());
-        getWorld().createExplosion(this, pos.getX(), pos.getY(), pos.getZ(), 2.5F, World.ExplosionSourceType.NONE);
+        getWorld().createExplosion(this, pos.getX(), pos.getY(), pos.getZ(), 2.0F, World.ExplosionSourceType.NONE);
 
         // Apply effects (e.g., slowness) to nearby entities
         //for (Entity entity : getWorld().getEntitiesByClass(PlayerEntity.class, this.getBoundingBox().expand(5), e -> e instanceof PlayerEntity)) {

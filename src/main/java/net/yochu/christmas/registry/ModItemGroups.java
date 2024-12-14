@@ -17,6 +17,7 @@ public class ModItemGroups {
                     .icon(() -> new ItemStack(ModItems.CANDY_CANE_SWORD)).entries((displayContext, entries) -> {
                         entries.add(ModItems.CANDY_CANE_SWORD);
                         entries.add(ModItems.PINE_GRENADE);
+                        entries.add(ModItems.ICICLE_TRIDENT);
 
                     }).build());
 

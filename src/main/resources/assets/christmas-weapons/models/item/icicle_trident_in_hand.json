@@ -1,0 +1,6 @@
+{
+  "parent": "christmas-weapons:item/template_big_weapon",
+  "textures": {
+    "layer0": "christmas-weapons:item/icicle_trident_in_hand"
+  }
+}

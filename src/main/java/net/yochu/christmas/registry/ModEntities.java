@@ -9,6 +9,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.yochu.christmas.ChristmasWeapons;
 import net.yochu.christmas.entity.custom.IceBoltProjectileEntity;
+import net.yochu.christmas.entity.custom.IcicleTridentEntity;
 import net.yochu.christmas.entity.custom.PineGrenadeProjectileEntity;
 import net.yochu.christmas.entity.custom.RockProjectileEntity;
 
@@ -28,6 +29,13 @@ public class ModEntities {
             FabricEntityTypeBuilder.<PineGrenadeProjectileEntity>create(SpawnGroup.MISC, PineGrenadeProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.4f,0.4f))
                     .build());
+    public static final EntityType<IcicleTridentEntity> ICICLE_TRIDENT_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(ChristmasWeapons.MOD_ID, "icicle_trident_projectile"),
+            FabricEntityTypeBuilder.<IcicleTridentEntity>create(SpawnGroup.MISC, IcicleTridentEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5F, 0.5F))
+                    .trackRangeBlocks(64)
+                    .trackedUpdateRate(10)
+                    .build()); // By default, this sets the dataFixerType to null.
 
     public static void registerModEntities() {
         ChristmasWeapons.LOGGER.info("Registering Entities for " + ChristmasWeapons.MOD_ID);
