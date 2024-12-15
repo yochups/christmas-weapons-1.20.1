@@ -112,7 +112,7 @@ public class IcicleTridentEntity extends PersistentProjectileEntity {
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
-        float f = 8.0F;
+        float f = 7.0F;
         if (entity instanceof LivingEntity livingEntity) {
             f += EnchantmentHelper.getAttackDamage(this.tridentStack, livingEntity.getGroup());
         }

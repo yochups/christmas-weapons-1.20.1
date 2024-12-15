@@ -1,5 +1,7 @@
 package net.yochu.christmas.item;
 
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -9,8 +11,12 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.render.model.json.Transformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
@@ -23,16 +29,26 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.yochu.christmas.entity.custom.IcicleTridentEntity;
-import net.yochu.christmas.registry.ModItems;
 
 public class IcicleTridentItem extends TridentItem {
+    public static final float ATTACK_DAMAGE = 8.0F;
+    private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
     public IcicleTridentItem(Item.Settings settings) {
         super(settings);
+        ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
+        builder.put(
+                EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Tool modifier", 7.0, EntityAttributeModifier.Operation.ADDITION)
+        );
+        builder.put(
+                EntityAttributes.GENERIC_ATTACK_SPEED,
+                new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Tool modifier", -2.9F, EntityAttributeModifier.Operation.ADDITION)
+        );
+        this.attributeModifiers = builder.build();
     }
 
     @Override
@@ -104,34 +120,17 @@ public class IcicleTridentItem extends TridentItem {
         } else {
             user.setCurrentHand(hand);
 
-            if (!world.isClient) {
-                this.renderCustomTridentInHand(itemStack, user, hand);
+            if (world.isClient) {
+                //this.renderCustomTridentInHand(itemStack, user, hand);
             }
 
             return TypedActionResult.consume(itemStack);
         }
     }
 
-    public void renderCustomTridentInHand(ItemStack stack, PlayerEntity user, Hand hand) {
-
-        if (user.isUsingItem() && stack.getItem() == ModItems.ICICLE_TRIDENT) {
-
-            ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
-            MatrixStack matrices = new MatrixStack();
-            VertexConsumerProvider vertexConsumers = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-
-            matrices.push();
-
-            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90));
-            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(0));
-
-            itemRenderer
-                    .renderItem(
-                            stack, ModelTransformationMode.GROUND, 0xF000F0, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, user.getWorld(), user.getId()
-                    );
-
-            matrices.pop();
-        }
+    @Override
+    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
+        return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);
     }
 }
 

@@ -35,7 +35,7 @@ public class ModEntities {
                     .dimensions(EntityDimensions.fixed(0.5F, 0.5F))
                     .trackRangeBlocks(64)
                     .trackedUpdateRate(10)
-                    .build()); // By default, this sets the dataFixerType to null.
+                    .build());
 
     public static void registerModEntities() {
         ChristmasWeapons.LOGGER.info("Registering Entities for " + ChristmasWeapons.MOD_ID);

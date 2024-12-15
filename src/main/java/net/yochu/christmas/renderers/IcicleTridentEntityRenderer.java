@@ -25,10 +25,10 @@ public class IcicleTridentEntityRenderer extends EntityRenderer<IcicleTridentEnt
                        VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
 
-        matrices.multiply(net.minecraft.util.math.RotationAxis.POSITIVE_Y.rotationDegrees(yaw - 135));
-        matrices.multiply(net.minecraft.util.math.RotationAxis.POSITIVE_Z.rotationDegrees(entity.getPitch()));
+        matrices.multiply(net.minecraft.util.math.RotationAxis.POSITIVE_Y.rotationDegrees(yaw - 90));
+        matrices.multiply(net.minecraft.util.math.RotationAxis.POSITIVE_Z.rotationDegrees(entity.getPitch()-45));
+        matrices.translate(-0.5,-0.5,0.0);
 
-        // Get the ItemStack from the entity
         if (!entity.getTridentStack().isEmpty()) {
             this.itemRenderer
                     .renderItem(

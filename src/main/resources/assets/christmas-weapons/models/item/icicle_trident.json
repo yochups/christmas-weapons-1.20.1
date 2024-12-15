@@ -1,6 +1,14 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "christmas-weapons:item/template_big_weapon",
   "textures": {
     "layer0": "christmas-weapons:item/icicle_trident"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "charging": 1
+      },
+      "model": "christmas-weapons:item/icicle_trident_held"
+    }
+  ]
 }
