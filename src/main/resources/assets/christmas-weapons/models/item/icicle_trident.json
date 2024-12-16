@@ -3,6 +3,28 @@
   "textures": {
     "layer0": "christmas-weapons:item/icicle_trident"
   },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ 0, -90, 55 ],
+      "translation": [ 0, -2.0, 0.5 ],
+      "scale": [ 1.6, 1.6, 1 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 0, 90, -55 ],
+      "translation": [ 0, -2.0, 0.5 ],
+      "scale": [ 1.6, 1.6, 1 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, -90, 25 ],
+      "translation": [ 1.13, 2.0, 0.13 ],
+      "scale": [ 1.1, 1.1, 1 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 0, 90, -25 ],
+      "translation": [ -1.13, 2.0, 0.13 ],
+      "scale": [ 1.1, 1.1, 1 ]
+    }
+  },
   "overrides": [
     {
       "predicate": {

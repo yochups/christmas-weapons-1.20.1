@@ -9,7 +9,10 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.listener.ClientPlayPacketListener;
@@ -17,12 +20,15 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.yochu.christmas.registry.ModEffects;
 import net.yochu.christmas.registry.ModEntities;
 import net.yochu.christmas.registry.ModItems;
 import org.jetbrains.annotations.Nullable;
@@ -89,6 +95,8 @@ public class IcicleTridentEntity extends PersistentProjectileEntity {
         super.tick();
     }
 
+
+
     private boolean isOwnerAlive() {
         Entity entity = this.getOwner();
         return entity != null && entity.isAlive() && (!(entity instanceof ServerPlayerEntity) || !entity.isSpectator());
@@ -107,6 +115,22 @@ public class IcicleTridentEntity extends PersistentProjectileEntity {
     @Override
     protected EntityHitResult getEntityCollision(Vec3d currentPosition, Vec3d nextPosition) {
         return this.dealtDamage ? null : super.getEntityCollision(currentPosition, nextPosition);
+    }
+
+    @Override
+    protected void onBlockHit(BlockHitResult blockHitResult) {
+        super.onBlockHit(blockHitResult);
+
+        this.getWorld().playSound(
+                null,
+                this.getX(),
+                this.getY(),
+                this.getZ(),
+                SoundEvents.ITEM_TRIDENT_HIT_GROUND,
+                SoundCategory.PLAYERS,
+                1.0F,
+                1.0F
+        );
     }
 
     @Override
@@ -153,6 +177,11 @@ public class IcicleTridentEntity extends PersistentProjectileEntity {
         }
 
         this.playSound(soundEvent, g, 1.0F);
+    }
+
+    @Override
+    protected void onHit(LivingEntity target) {
+        target.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 1, true, false));
     }
 
     public boolean hasChanneling() {

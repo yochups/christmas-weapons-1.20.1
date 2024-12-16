@@ -16,8 +16,9 @@ public class ChristmasWeaponsClient implements ClientModInitializer {
     public void onInitializeClient() {
         EntityRendererRegistry.register(ModEntities.ROCK_PROJECTILE, RockEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.ICEBOLT_PROJECTILE, IceboltEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.PINE_GRENADE_PROJECTILE, SpinningItemEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.PINE_GRENADE_PROJECTILE, PineGrenadeEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.ICICLE_TRIDENT_PROJECTILE, IcicleTridentEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.GINGERBREAD_BOOMERANG_PROJECTILE, BoomerangEntityRenderer::new);
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.FROSTBITE_SWEEP_ATTACK, FrostbiteSlashParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.SHOCKWAVE, ShockwaveParticle.Factory::new);

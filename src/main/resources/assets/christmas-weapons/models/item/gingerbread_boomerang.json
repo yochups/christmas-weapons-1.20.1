@@ -1,0 +1,22 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "christmas-weapons:item/gingerbread_boomerang"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        0,
+        -90,
+        -40
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        0,
+        -90,
+        -40
+      ]
+    }
+  }
+}

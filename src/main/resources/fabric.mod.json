@@ -2,8 +2,8 @@
 	"schemaVersion": 1,
 	"id": "christmas-weapons",
 	"version": "${version}",
-	"name": "christmas weapons",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Christmas Arsenal",
+	"description": "Yochu's first mod, created for Onda's Origin Hunger Games",
 	"authors": [
 		"Yochu"
 	],

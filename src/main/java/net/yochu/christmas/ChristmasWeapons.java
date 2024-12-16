@@ -19,5 +19,7 @@ public class ChristmasWeapons implements ModInitializer {
 		ModEntities.registerModEntities();
 		ModParticles.registerParticles();
 		ModSounds.registerSounds();
+
+		ModEffects.registerEffects();
 	}
 }

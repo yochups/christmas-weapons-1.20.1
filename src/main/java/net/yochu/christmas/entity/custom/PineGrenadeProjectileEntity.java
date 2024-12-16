@@ -49,6 +49,7 @@ public class PineGrenadeProjectileEntity extends ThrownItemEntity {
 
         Vec3d velocity = this.getVelocity();
         double speed = velocity.length();
+        this.velocityDirty = true;
 
         spinAngle += (float) (SPIN_SPEED * speed);
         spinAngle %= 360;
@@ -57,7 +58,9 @@ public class PineGrenadeProjectileEntity extends ThrownItemEntity {
 
         // If the grenade has been in the world for long enough, trigger explosion
         if (ticksExisted >= EXPLOSION_DELAY) {
-            triggerExplosion();
+            if (!this.isRemoved()) {
+             triggerExplosion();
+            }
             this.remove(RemovalReason.DISCARDED); // Remove the grenade entity after exploding
         }
     }
@@ -108,6 +111,7 @@ public class PineGrenadeProjectileEntity extends ThrownItemEntity {
 
             this.setVelocity(reflection.multiply(BOUNCE_DAMPEN));
 
+            this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, 0.5f ,1f);
             this.playSound(ModSounds.PINECONE_LAND, 0.4f, 1f);
         }
 

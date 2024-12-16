@@ -8,7 +8,8 @@ public class ModFoodComponents {
     public static final FoodComponent CANDY_CANE_SWORD = new FoodComponent.Builder()
             .hunger(5)
             .saturationModifier(0.5f)
-            .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 200), 1.0f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 200, 1), 1.0f)
             .alwaysEdible()
+            .snack()
             .build();
 }

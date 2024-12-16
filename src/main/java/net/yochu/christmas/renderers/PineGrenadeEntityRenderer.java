@@ -18,20 +18,20 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import net.yochu.christmas.entity.custom.PineGrenadeProjectileEntity;
 @Environment(EnvType.CLIENT)
-public class SpinningItemEntityRenderer<T extends Entity & FlyingItemEntity> extends EntityRenderer<T> {
+public class PineGrenadeEntityRenderer<T extends Entity & FlyingItemEntity> extends EntityRenderer<T> {
     private static final float MIN_DISTANCE = 12.25F;
     private final ItemRenderer itemRenderer;
     private final float scale;
     private final boolean lit;
 
-    public SpinningItemEntityRenderer(EntityRendererFactory.Context ctx, float scale, boolean lit) {
+    public PineGrenadeEntityRenderer(EntityRendererFactory.Context ctx, float scale, boolean lit) {
         super(ctx);
         this.itemRenderer = ctx.getItemRenderer();
         this.scale = scale;
         this.lit = lit;
     }
 
-    public SpinningItemEntityRenderer(EntityRendererFactory.Context context) {
+    public PineGrenadeEntityRenderer(EntityRendererFactory.Context context) {
         this(context, 1.0F, false);
     }
 
@@ -44,9 +44,9 @@ public class SpinningItemEntityRenderer<T extends Entity & FlyingItemEntity> ext
     public void render(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         if (entity.age >= 2 || !(this.dispatcher.camera.getFocusedEntity().squaredDistanceTo(entity) < 12.25)) {
             matrices.push();
-            matrices.scale(this.scale*1.2f, this.scale*1.2f, this.scale*1.2f);
+            matrices.scale(this.scale, this.scale, this.scale);
             //matrices.translate(0.25f, 0.25f, 0.25f); //fix these!!!
-            matrices.translate(0,0.3,0);
+            matrices.translate(0,0.1,0);
             matrices.multiply(
                     RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevYaw, entity.getYaw()) - 90.0F)
             );

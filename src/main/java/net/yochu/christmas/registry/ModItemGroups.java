@@ -18,6 +18,7 @@ public class ModItemGroups {
                         entries.add(ModItems.CANDY_CANE_SWORD);
                         entries.add(ModItems.PINE_GRENADE);
                         entries.add(ModItems.ICICLE_TRIDENT);
+                        entries.add(ModItems.GINGERBREAD_BOOMERANG);
 
                     }).build());
 

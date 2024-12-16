@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:item/handheld",
+	"parent": "christmas-weapons:item/template_big_weapon",
 	"textures": {
-		"layer0": "christmas-weapons:item/candy_cane_sword"
+		"layer0": "christmas-weapons:item/candy_cane_sword_in_hand"
 	}
 }

@@ -11,10 +11,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.yochu.christmas.ChristmasWeapons;
-import net.yochu.christmas.item.IceboltItem;
-import net.yochu.christmas.item.IcicleTridentItem;
-import net.yochu.christmas.item.PineGrenadeItem;
-import net.yochu.christmas.item.RockItem;
+import net.yochu.christmas.item.*;
 
 public class ModItems {
     public static final Item CANDY_CANE_SWORD = registerItem("candy_cane_sword",
@@ -27,11 +24,14 @@ public class ModItems {
             new IceboltItem(new FabricItemSettings()));
     public static final Item ICICLE_TRIDENT = registerItem("icicle_trident",
             new IcicleTridentItem(new FabricItemSettings().maxCount(1).maxDamage(1024)));
+    public static final Item GINGERBREAD_BOOMERANG = registerItem("gingerbread_boomerang",
+            new GingerbreadBoomerangItem(new FabricItemSettings().maxCount(1)));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(CANDY_CANE_SWORD);
         entries.add(PINE_GRENADE);
         entries.add(ICICLE_TRIDENT);
+        entries.add(GINGERBREAD_BOOMERANG);
     }
 
     private static Item registerItem(String name, Item item) {
