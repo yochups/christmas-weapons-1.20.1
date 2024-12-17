@@ -1,4 +1,4 @@
-package net.yochu.christmas.item;
+package net.yochu.christmas.item.custom;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -11,7 +11,12 @@ import net.yochu.christmas.entity.custom.GingerbreadBoomerangEntity;
 public class GingerbreadBoomerangItem extends Item {
 
     public GingerbreadBoomerangItem(Settings settings) {
-        super(settings);
+        super(settings.maxDamage(48));
+    }
+
+    @Override
+    public boolean isDamageable() {
+        return true;
     }
 
     @Override
@@ -21,11 +26,13 @@ public class GingerbreadBoomerangItem extends Item {
             // Spawn the boomerang entity
             GingerbreadBoomerangEntity boomerangEntity = new GingerbreadBoomerangEntity(world, user);
             boomerangEntity.setItem(stack);
+            boomerangEntity.setOwnerHand(hand);
+            boomerangEntity.setDurability(stack.getDamage());
             boomerangEntity.setPosition(boomerangEntity.getX(), boomerangEntity.getY()+1.5D,boomerangEntity.getZ());
             boomerangEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
             world.spawnEntity(boomerangEntity);
 
-            stack.damage(1, user, (p) -> p.sendToolBreakStatus(hand));
+            //stack.damage(1, user, (p) -> p.sendToolBreakStatus(hand));
         }
 
         if (!user.getAbilities().creativeMode) {

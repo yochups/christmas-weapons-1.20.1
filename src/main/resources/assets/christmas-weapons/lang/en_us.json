@@ -5,8 +5,9 @@
   "item.christmas-weapons.pine_grenade": "Pine Grenade",
   "item.christmas-weapons.icicle_trident": "Icicle Trident",
   "item.christmas-weapons.gingerbread_boomerang": "Gingerbread Boomerang",
+  "item.christmas-weapons.toy_hammer": "Toy Hammer",
 
-  "itemgroup.weapons": "Christmas Weapons",
+  "itemgroup.weapons": "Christmas Arsenal",
 
   "entity.christmas_weapons.rock_projectile": "Rock",
   "entity.christmas-weapons.icebolt_projectile": "Icebolt",
@@ -14,9 +15,11 @@
   "entity.christmas-weapons.icicle_trident_projectile": "Icicle Trident",
   "entity.christmas-weapons.gingerbread_boomerang_projectile": "Gingerbread Boomerang",
 
-  "sounds.christmas-weapons.shockwave": "Shockwave Impact",
+  "sounds.christmas-weapons.shockwave": "Shockwave ripples",
   "sounds.christmas-weapons.scream": "Scream",
   "sounds.christmas-weapons.pinecone_land": "Pinecone bounces",
+  "sounds.christmas-weapons.china": "China???",
+  "sounds.christmas-weapons.squeaky_hit": "Toy Hammer slams",
 
   "death.attack.rock_damage_type": "%1$s was crushed by a rock"
 }

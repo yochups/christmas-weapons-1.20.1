@@ -21,14 +21,14 @@ public class ModEntities {
     public static final EntityType<IceBoltProjectileEntity> ICEBOLT_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(ChristmasWeapons.MOD_ID, "icebolt_projectile"),
             FabricEntityTypeBuilder.<IceBoltProjectileEntity>create(SpawnGroup.MISC, IceBoltProjectileEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.4f, 0.4f))
+                    .dimensions(EntityDimensions.fixed(0.54f, 0.5f))
                     .trackRangeBlocks(128)
                     .trackedUpdateRate(1)
                     .build());
     public static final EntityType<PineGrenadeProjectileEntity> PINE_GRENADE_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(ChristmasWeapons.MOD_ID, "pine_grenade_projectile"),
             FabricEntityTypeBuilder.<PineGrenadeProjectileEntity>create(SpawnGroup.MISC, PineGrenadeProjectileEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.3f,0.3f))
+                    .dimensions(EntityDimensions.fixed(0.5f,0.5f))
                     .trackRangeBlocks(64)
                     .trackedUpdateRate(1)
                     .build());

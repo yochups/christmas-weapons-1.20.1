@@ -3,8 +3,11 @@ package net.yochu.christmas.entity.custom;
 import com.ibm.icu.text.MessagePattern;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,10 +20,12 @@ import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -44,6 +49,9 @@ public class GingerbreadBoomerangEntity extends ThrownItemEntity {
     private static final int lifetime = 20;
     private static final double speed = 1.0d;
 
+    private int durability = 48;
+    private Hand ownerHand;
+
     private int soundCooldown = 0;
 
     public GingerbreadBoomerangEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
@@ -56,6 +64,10 @@ public class GingerbreadBoomerangEntity extends ThrownItemEntity {
         this.setPosition(thrower.getX(), thrower.getY(), thrower.getZ());
     }
 
+    public void setTicksExisted(int ticks) {
+        this.ticksExisted = ticks;
+    }
+
     public void spawnParticle(BlockHitResult blockHitResult) {
         BlockPos blockPos = blockHitResult.getBlockPos();
         BlockState blockState = getWorld().getBlockState(blockPos);
@@ -64,7 +76,7 @@ public class GingerbreadBoomerangEntity extends ThrownItemEntity {
         Random random = new Random();
         this.getWorld().addParticle(ModParticles.SHOCKWAVE, this.getX(), this.getY(), this.getZ(), 0D, 0D, 0D);
         for(int i = 0; i < 30; ++i) {
-            int offset = 6; //this is divided by 10
+            int offset = 6;
             float xoffset = (float) (random.nextInt(-offset, offset));
             float yoffset = (float) (random.nextInt(-offset, offset));
             float zoffset = (float) (random.nextInt(-offset, offset));
@@ -80,11 +92,10 @@ public class GingerbreadBoomerangEntity extends ThrownItemEntity {
 
         if (!this.getWorld().isClient && soundCooldown <= 0) {
             this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(),
-                    SoundEvents.ENTITY_EGG_THROW, SoundCategory.AMBIENT, 0.4F, 0.7F);
-            soundCooldown = 7; // Reset the cooldown to the sound duration
+                    SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.3F, 1.1F);
+            soundCooldown = 5;
         }
 
-        // Decrease the sound cooldown
         if (soundCooldown > 0) {
             soundCooldown--;
         }
@@ -132,6 +143,15 @@ public class GingerbreadBoomerangEntity extends ThrownItemEntity {
         // This method is ignored because hasNoGravity() is always true
     }
 
+    public void setOwnerHand(Hand hand) {
+        this.ownerHand = hand;
+    }
+
+    public Hand getOwnerHand() {
+        return this.ownerHand;
+    }
+
+
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         if (!(entityHitResult.getEntity() == this.getOwner())) {
@@ -174,9 +194,16 @@ public class GingerbreadBoomerangEntity extends ThrownItemEntity {
             this.setVelocity(toOwner.multiply(speed));
             if (this.distanceTo(owner) < 1.5) {
                 if (!owner.getAbilities().creativeMode) {
-                    owner.getInventory().insertStack(new ItemStack(ModItems.GINGERBREAD_BOOMERANG));
+                    Item item = ModItems.GINGERBREAD_BOOMERANG;
+                    ItemStack itemStack = new ItemStack(item);
+                    itemStack.setDamage(this.durability);
+                    itemStack.damage(1, (LivingEntity) getOwner(), (Entity) -> Entity.sendToolBreakStatus(getOwnerHand()));
+
+                    owner.getInventory().insertStack(itemStack);
+                    owner.getItemCooldownManager().set(item, 40);
                 }
-                this.discard();
+
+                this.remove(RemovalReason.DISCARDED);
             }
         }
     }
@@ -192,5 +219,13 @@ public class GingerbreadBoomerangEntity extends ThrownItemEntity {
 
     public void setReturning(boolean returning) {
         this.returning = returning;
+    }
+
+    public int getDurability() {
+        return durability;
+    }
+
+    public void setDurability(int durability) {
+        this.durability = durability;
     }
 }

@@ -10,6 +10,9 @@ public class ModSounds {
     public static final SoundEvent SHOCKWAVE = registerSoundEvent("shockwave");
     public static final SoundEvent SCREAM = registerSoundEvent("scream");
     public static final SoundEvent PINECONE_LAND = registerSoundEvent("pinecone_land");
+    public static final SoundEvent CHINA = registerSoundEvent("china");
+    public static final SoundEvent SQUEAKY_HIT = registerSoundEvent("squeaky_hit");
+
 
     private static SoundEvent registerSoundEvent(String name) {
         Identifier id = new Identifier(ChristmasWeapons.MOD_ID, name);

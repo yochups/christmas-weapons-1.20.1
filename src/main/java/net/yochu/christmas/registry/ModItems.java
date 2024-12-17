@@ -6,12 +6,11 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.SwordItem;
-import net.minecraft.item.TridentItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.yochu.christmas.ChristmasWeapons;
-import net.yochu.christmas.item.*;
+import net.yochu.christmas.item.custom.*;
 
 public class ModItems {
     public static final Item CANDY_CANE_SWORD = registerItem("candy_cane_sword",
@@ -26,12 +25,15 @@ public class ModItems {
             new IcicleTridentItem(new FabricItemSettings().maxCount(1).maxDamage(1024)));
     public static final Item GINGERBREAD_BOOMERANG = registerItem("gingerbread_boomerang",
             new GingerbreadBoomerangItem(new FabricItemSettings().maxCount(1)));
+    public static final Item TOY_HAMMER = registerItem("toy_hammer",
+            new ToyHammerItem(ModToolMaterial.CHRISTMAS, 0, -3.0f, new FabricItemSettings()));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(CANDY_CANE_SWORD);
         entries.add(PINE_GRENADE);
         entries.add(ICICLE_TRIDENT);
         entries.add(GINGERBREAD_BOOMERANG);
+        entries.add(TOY_HAMMER);
     }
 
     private static Item registerItem(String name, Item item) {

@@ -48,6 +48,12 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;spawnParticles(Lnet/minecraft/particle/ParticleEffect;DDDIDDDD)I"), index = 0
     )
     private <T extends ParticleEffect> T modifySweepParticle(T particle) {
-        return getMainHandStack().isOf(ModItems.CANDY_CANE_SWORD) ? (T) ModParticles.FROSTBITE_SWEEP_ATTACK : particle;
+        ItemStack stack = getMainHandStack();
+        if (stack.isOf(ModItems.CANDY_CANE_SWORD)) {
+            return (T) ModParticles.CANDY_CANE_SWEEP_ATTACK;
+        } else if (stack.isOf(ModItems.TOY_HAMMER)) {
+            return (T) ModParticles.TOY_HAMMER_SLAM_ATTACK;
+        }
+        return particle;
     }
 }

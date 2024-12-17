@@ -101,6 +101,10 @@ public class IceBoltProjectileEntity extends ThrownItemEntity {
     public void onEntityHit(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
 
+        if (entity == this.getOwner()) {
+            return;
+        }
+
         float f = (float)this.getVelocity().length();
         int i = MathHelper.ceil(MathHelper.clamp((double)f * this.damage, 0.0, 2.147483647E9));
         //if (this.isCritical()) {

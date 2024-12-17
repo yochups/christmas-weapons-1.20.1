@@ -6,16 +6,16 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 
-public class FrostbiteSlashParticle extends SpriteBillboardParticle {
+public class ToyHammerSlamParticle extends SpriteBillboardParticle {
     private final SpriteProvider spriteProvider;
 
-    FrostbiteSlashParticle(ClientWorld world, double x, double y, double z, double d, SpriteProvider spriteProvider) {
+    ToyHammerSlamParticle(ClientWorld world, double x, double y, double z, double d, SpriteProvider spriteProvider) {
         super(world, x, y, z, 0.0, 0.0, 0.0);
         this.spriteProvider = spriteProvider;
         this.maxAge = 4;
-        this.red = 1;
-        this.green = 1;
-        this.blue = 1;
+        this.red = 1.0f;
+        this.green = 0.0f;
+        this.blue = 0.0f;
         this.scale = 1.0F - (float)d * 0.5F;
         this.setSpriteForAge(spriteProvider);
     }
@@ -51,7 +51,7 @@ public class FrostbiteSlashParticle extends SpriteBillboardParticle {
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new FrostbiteSlashParticle(clientWorld, d, e, f, g, this.spriteProvider);
+            return new ToyHammerSlamParticle(clientWorld, d, e, f, g, this.spriteProvider);
         }
     }
 }

@@ -20,5 +20,17 @@
       "christmas-weapons:entity/pinecone_land_3"
     ],
     "subtitle": "sounds.christmas-weapons.pinecone_land"
+  },
+  "china": {
+    "sounds": [
+      "christmas-weapons:china"
+    ],
+    "subtitle": "sounds.christmas-weapons.china"
+  },
+  "squeaky_hit": {
+    "sounds": [
+      "christmas-weapons:item/squeaky_hit"
+    ],
+    "subtitle": "sounds.christmas-weapons.squeaky_hit"
   }
 }

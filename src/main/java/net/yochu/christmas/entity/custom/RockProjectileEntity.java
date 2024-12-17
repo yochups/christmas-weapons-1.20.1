@@ -93,6 +93,10 @@ public class RockProjectileEntity extends ThrownItemEntity {
     public void onEntityHit(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
 
+        if (entity == this.getOwner()) {
+            return;
+        }
+
         Entity entity2 = this.getOwner();
         DamageSource damageSource;
         if (entity2 == null) {

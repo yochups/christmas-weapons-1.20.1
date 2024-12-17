@@ -1,4 +1,4 @@
-package net.yochu.christmas.item;
+package net.yochu.christmas.item.custom;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

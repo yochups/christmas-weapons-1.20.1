@@ -56,12 +56,11 @@ public class PineGrenadeProjectileEntity extends ThrownItemEntity {
 
         ticksExisted++;
 
-        // If the grenade has been in the world for long enough, trigger explosion
         if (ticksExisted >= EXPLOSION_DELAY) {
             if (!this.isRemoved()) {
-             triggerExplosion();
+                triggerExplosion();
+                this.remove(RemovalReason.DISCARDED);
             }
-            this.remove(RemovalReason.DISCARDED); // Remove the grenade entity after exploding
         }
     }
 
@@ -78,6 +77,7 @@ public class PineGrenadeProjectileEntity extends ThrownItemEntity {
     public void onSpawnPacket(EntitySpawnS2CPacket packet) {
         super.onSpawnPacket(packet);
     }
+
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
@@ -100,22 +100,22 @@ public class PineGrenadeProjectileEntity extends ThrownItemEntity {
     protected void onEntityHit(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
 
-        if (entity instanceof LivingEntity) {
-            triggerExplosion();
-            this.remove(RemovalReason.DISCARDED);
-        } else {
-            Vec3d entityToProjectile = this.getPos().subtract(entity.getPos()).normalize();
-            Vec3d velocity = this.getVelocity();
-            double dotProduct = velocity.dotProduct(entityToProjectile);
-            Vec3d reflection = velocity.subtract(entityToProjectile.multiply(2 * dotProduct));
+        if (!(entity == this.getOwner())) {
+            if (entity instanceof LivingEntity) {
+                triggerExplosion();
+                this.remove(RemovalReason.DISCARDED);
+            } else {
+                Vec3d entityToProjectile = this.getPos().subtract(entity.getPos()).normalize();
+                Vec3d velocity = this.getVelocity();
+                double dotProduct = velocity.dotProduct(entityToProjectile);
+                Vec3d reflection = velocity.subtract(entityToProjectile.multiply(2 * dotProduct));
 
-            this.setVelocity(reflection.multiply(BOUNCE_DAMPEN));
-
+                this.setVelocity(reflection.multiply(BOUNCE_DAMPEN));
+            }
             this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, 0.5f ,1f);
-            this.playSound(ModSounds.PINECONE_LAND, 0.4f, 1f);
+            this.playSound(ModSounds.PINECONE_LAND, 0.2f, 1f);
+            super.onEntityHit(entityHitResult);
         }
-
-        super.onEntityHit(entityHitResult);
     }
 
     private void triggerExplosion() {
