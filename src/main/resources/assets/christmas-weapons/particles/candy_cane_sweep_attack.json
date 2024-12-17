@@ -1,12 +1,12 @@
 {
     "textures": [
-        "christmas_weapons:sweep/sweep_00",
-        "christmas_weapons:sweep/sweep_01",
-        "christmas_weapons:sweep/sweep_02",
-        "christmas_weapons:sweep/sweep_03",
-        "christmas_weapons:sweep/sweep_04",
-        "christmas_weapons:sweep/sweep_05",
-        "christmas_weapons:sweep/sweep_06",
-        "christmas_weapons:sweep/sweep_07"
+        "christmas-weapons:sweep/frostbite/sweep_00",
+        "christmas-weapons:sweep/frostbite/sweep_01",
+        "christmas-weapons:sweep/frostbite/sweep_02",
+        "christmas-weapons:sweep/frostbite/sweep_03",
+        "christmas-weapons:sweep/frostbite/sweep_04",
+        "christmas-weapons:sweep/frostbite/sweep_05",
+        "christmas-weapons:sweep/frostbite/sweep_06",
+        "christmas-weapons:sweep/frostbite/sweep_07"
     ]
 }

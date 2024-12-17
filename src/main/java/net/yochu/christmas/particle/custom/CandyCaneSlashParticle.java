@@ -15,9 +15,6 @@ public class CandyCaneSlashParticle extends SpriteBillboardParticle {
         super(world, x, y, z, 0.0, 0.0, 0.0);
         this.spriteProvider = spriteProvider;
         this.maxAge = 4;
-        this.red = 1;
-        this.green = 1;
-        this.blue = 1;
         this.scale = 1.0F - (float)d * 0.5F;
         this.setSpriteForAge(spriteProvider);
         chooseRandomColor();
@@ -43,13 +40,13 @@ public class CandyCaneSlashParticle extends SpriteBillboardParticle {
     private void chooseRandomColor() {
         Random random = new Random();
         if (random.nextBoolean()) {
-            this.red = 1.0F;
+            this.red = 0.8F;
             this.green = 0.0F;
             this.blue = 0.0F;
         } else {
-            this.red = 1.0F;
-            this.green = 1.0F;
-            this.blue = 1.0F;
+            this.red = 0.9F;
+            this.green = 0.9F;
+            this.blue = 0.9F;
         }
     }
 

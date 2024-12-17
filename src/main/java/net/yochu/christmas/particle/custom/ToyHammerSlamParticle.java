@@ -13,7 +13,7 @@ public class ToyHammerSlamParticle extends SpriteBillboardParticle {
         super(world, x, y, z, 0.0, 0.0, 0.0);
         this.spriteProvider = spriteProvider;
         this.maxAge = 4;
-        this.red = 1.0f;
+        this.red = 0.8f;
         this.green = 0.0f;
         this.blue = 0.0f;
         this.scale = 1.0F - (float)d * 0.5F;
