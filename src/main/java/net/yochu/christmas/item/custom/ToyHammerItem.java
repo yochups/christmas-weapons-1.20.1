@@ -4,9 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.*;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -19,7 +17,6 @@ import net.minecraft.world.World;
 import net.yochu.christmas.registry.ModParticles;
 import net.yochu.christmas.registry.ModSounds;
 
-
 public class ToyHammerItem extends SwordItem {
 
     public ToyHammerItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
@@ -31,6 +28,14 @@ public class ToyHammerItem extends SwordItem {
         World world = attacker.getWorld();
 
         if (!world.isClient) {
+            if (target.isBlocking() && target.getActiveItem().getItem() instanceof ShieldItem shieldItem) {
+                if (target instanceof PlayerEntity player) {
+                 player.getItemCooldownManager().set(shieldItem, 100);
+                }
+
+                world.playSound(null, target.getBlockPos(), SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.PLAYERS, 1.0F, 1.0F);
+            }
+
             if (isCriticalHit(attacker)) {
                 knockUp(target, attacker);
             } else {
