@@ -56,6 +56,7 @@ public class ToyHammerItem extends SwordItem {
 
         double knockbackStrength = 1.6;
         target.setVelocity(knockbackDirection.x * knockbackStrength, 0.4, knockbackDirection.z * knockbackStrength);
+        target.velocityModified = true;
         attacker.getWorld().playSound(null, target.getBlockPos(), ModSounds.SQUEAKY_HIT,
                 SoundCategory.PLAYERS, 1.0F, 1.0F);
     }
@@ -66,6 +67,7 @@ public class ToyHammerItem extends SwordItem {
         double horizontalStrength = 0.5;
         double verticalStrength = 0.8;
         target.setVelocity(knockbackDirection.x * horizontalStrength, verticalStrength, knockbackDirection.z * horizontalStrength);
+        target.velocityModified = true;
         attacker.getWorld().playSound(null, attacker.getBlockPos(), ModSounds.SQUEAKY_HIT,
                 SoundCategory.PLAYERS, 1.0F, 1.2F);
     }
