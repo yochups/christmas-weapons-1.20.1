@@ -12,6 +12,7 @@ public class ModParticles {
     public static final DefaultParticleType SHOCKWAVE = FabricParticleTypes.simple();
     public static final DefaultParticleType CANDY_CANE_SWEEP_ATTACK = FabricParticleTypes.simple();
     public static final DefaultParticleType TOY_HAMMER_SLAM_ATTACK = FabricParticleTypes.simple();
+    public static final DefaultParticleType FAIRYLIGHT_WHIP_SWEEP_ATTACK = FabricParticleTypes.simple();
 
     public static void registerParticles() {
         Registry.register(Registries.PARTICLE_TYPE, new Identifier(ChristmasWeapons.MOD_ID, "frostbite_sweep_attack"),
@@ -22,6 +23,8 @@ public class ModParticles {
                 TOY_HAMMER_SLAM_ATTACK);
         Registry.register(Registries.PARTICLE_TYPE, new Identifier(ChristmasWeapons.MOD_ID, "shockwave"),
                 SHOCKWAVE);
+        Registry.register(Registries.PARTICLE_TYPE, new Identifier(ChristmasWeapons.MOD_ID, "fairylight_sweep_attack"),
+                FAIRYLIGHT_WHIP_SWEEP_ATTACK);
     }
 }
 

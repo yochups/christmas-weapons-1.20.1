@@ -2,8 +2,6 @@ package net.yochu.christmas;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.minecraft.entity.EntityType;
-import net.yochu.christmas.entity.custom.IcicleTridentEntity;
 import net.yochu.christmas.registry.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

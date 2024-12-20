@@ -17,7 +17,7 @@ public class ShockwaveParticle extends SpriteBillboardParticle {
         this.green = 1;
         this.blue = 1;
         this.alpha = 0.3f;
-        this.scale = 1.0F - (float)d * 0.5F;
+        this.scale = 1.4F - (float)d * 0.5F;
         this.setSpriteForAge(spriteProvider);
     }
 
@@ -40,7 +40,7 @@ public class ShockwaveParticle extends SpriteBillboardParticle {
 
     @Override
     public ParticleTextureSheet getType() {
-        return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
+        return ParticleTextureSheet.PARTICLE_SHEET_OPAQUE;
     }
 
     @Environment(EnvType.CLIENT)

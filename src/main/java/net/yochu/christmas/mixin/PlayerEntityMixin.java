@@ -53,6 +53,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             return (T) ModParticles.CANDY_CANE_SWEEP_ATTACK;
         } else if (stack.isOf(ModItems.TOY_HAMMER)) {
             return (T) ModParticles.TOY_HAMMER_SLAM_ATTACK;
+        } else if (stack.isOf(ModItems.FAIRY_LIGHT_WHIP)) {
+            return (T) ModParticles.FAIRYLIGHT_WHIP_SWEEP_ATTACK;
         }
         return particle;
     }

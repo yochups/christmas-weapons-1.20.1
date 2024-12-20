@@ -25,7 +25,7 @@ public class PineGrenadeItem extends Item {
 
         if (!world.isClient) {
             PineGrenadeProjectileEntity pineGrenadeProjectileEntity = new PineGrenadeProjectileEntity(world, user);
-            pineGrenadeProjectileEntity.setPosition(pineGrenadeProjectileEntity.getX(), pineGrenadeProjectileEntity.getY()+1.6D,pineGrenadeProjectileEntity.getZ());
+            pineGrenadeProjectileEntity.setPosition(pineGrenadeProjectileEntity.getX(), pineGrenadeProjectileEntity.getY()+1.5D,pineGrenadeProjectileEntity.getZ());
             pineGrenadeProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.0F, 1.0F);
             world.spawnEntity(pineGrenadeProjectileEntity); // Spawn the thrown grenade entity
         }

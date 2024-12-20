@@ -24,6 +24,7 @@ public class GingerbreadBoomerangItem extends Item {
         ItemStack stack = user.getStackInHand(hand);
         if (!world.isClient) {
             // Spawn the boomerang entity
+            user.getItemCooldownManager().set(stack.getItem(), 40);
             GingerbreadBoomerangEntity boomerangEntity = new GingerbreadBoomerangEntity(world, user);
             boomerangEntity.setItem(stack);
             boomerangEntity.setOwnerHand(hand);

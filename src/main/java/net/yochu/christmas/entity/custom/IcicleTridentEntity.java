@@ -11,6 +11,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
@@ -100,6 +101,16 @@ public class IcicleTridentEntity extends PersistentProjectileEntity {
     private boolean isOwnerAlive() {
         Entity entity = this.getOwner();
         return entity != null && entity.isAlive() && (!(entity instanceof ServerPlayerEntity) || !entity.isSpectator());
+    }
+
+    @Override
+    public void setOwner(@Nullable Entity entity) {
+        super.setOwner(entity);
+        if (entity instanceof PlayerEntity) {
+            this.pickupType = ((PlayerEntity)entity).getAbilities().creativeMode
+                    ? PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY
+                    : PersistentProjectileEntity.PickupPermission.ALLOWED;
+        }
     }
 
     @Override

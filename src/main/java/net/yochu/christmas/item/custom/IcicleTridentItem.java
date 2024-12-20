@@ -54,6 +54,7 @@ public class IcicleTridentItem extends TridentItem {
                         stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(user.getActiveHand()));
                         if (j == 0) {
                             IcicleTridentEntity tridentEntity = new IcicleTridentEntity(world, playerEntity, stack);
+                            tridentEntity.setOwner(user);
                             tridentEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, 2.5F + (float)j * 0.5F, 1.0F);
                             if (playerEntity.getAbilities().creativeMode) {
                                 tridentEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;

@@ -20,6 +20,7 @@ public class ModItemGroups {
                         entries.add(ModItems.ICICLE_TRIDENT);
                         entries.add(ModItems.GINGERBREAD_BOOMERANG);
                         entries.add(ModItems.TOY_HAMMER);
+                        entries.add(ModItems.FAIRY_LIGHT_WHIP);
 
                     }).build());
 

@@ -26,7 +26,9 @@ public class ModItems {
     public static final Item GINGERBREAD_BOOMERANG = registerItem("gingerbread_boomerang",
             new GingerbreadBoomerangItem(new FabricItemSettings().maxCount(1)));
     public static final Item TOY_HAMMER = registerItem("toy_hammer",
-            new ToyHammerItem(ModToolMaterial.CHRISTMAS, 0, -3.0f, new FabricItemSettings()));
+            new ToyHammerItem(ModToolMaterial.CHRISTMAS, 1, -3.0f, new FabricItemSettings()));
+    public static  final Item FAIRY_LIGHT_WHIP = registerItem("fairy_light_whip",
+            new FairylightWhipItem(ModToolMaterial.CHRISTMAS, 0, -2.2f, 5.0f, new FabricItemSettings()));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(CANDY_CANE_SWORD);
@@ -34,6 +36,7 @@ public class ModItems {
         entries.add(ICICLE_TRIDENT);
         entries.add(GINGERBREAD_BOOMERANG);
         entries.add(TOY_HAMMER);
+        entries.add(FAIRY_LIGHT_WHIP);
     }
 
     private static Item registerItem(String name, Item item) {
