@@ -1,10 +1,7 @@
 package net.yochu.christmas.entity.custom;
 
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LightningEntity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -34,12 +31,16 @@ import net.yochu.christmas.registry.ModEntities;
 import net.yochu.christmas.registry.ModItems;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.UUID;
+
 public class IcicleTridentEntity extends PersistentProjectileEntity {
     private static final TrackedData<Byte> LOYALTY = DataTracker.registerData(IcicleTridentEntity.class, TrackedDataHandlerRegistry.BYTE);
     private static final TrackedData<Boolean> ENCHANTED = DataTracker.registerData(IcicleTridentEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private ItemStack tridentStack = new ItemStack(Items.TRIDENT);
     private boolean dealtDamage;
     public int returnTimer;
+
+    private UUID ownerUUID;
 
     public IcicleTridentEntity(EntityType<? extends IcicleTridentEntity> entityType, World world) {
         super(entityType, world);
@@ -103,6 +104,14 @@ public class IcicleTridentEntity extends PersistentProjectileEntity {
         return entity != null && entity.isAlive() && (!(entity instanceof ServerPlayerEntity) || !entity.isSpectator());
     }
 
+    public void setOwnerUUID(UUID ownerUUID) {
+        this.ownerUUID = ownerUUID;
+    }
+
+    public UUID getOwnerUUID() {
+        return ownerUUID;
+    }
+
     @Override
     public void setOwner(@Nullable Entity entity) {
         super.setOwner(entity);
@@ -126,22 +135,6 @@ public class IcicleTridentEntity extends PersistentProjectileEntity {
     @Override
     protected EntityHitResult getEntityCollision(Vec3d currentPosition, Vec3d nextPosition) {
         return this.dealtDamage ? null : super.getEntityCollision(currentPosition, nextPosition);
-    }
-
-    @Override
-    protected void onBlockHit(BlockHitResult blockHitResult) {
-        super.onBlockHit(blockHitResult);
-
-        this.getWorld().playSound(
-                null,
-                this.getX(),
-                this.getY(),
-                this.getZ(),
-                SoundEvents.ITEM_TRIDENT_HIT_GROUND,
-                SoundCategory.PLAYERS,
-                1.0F,
-                1.0F
-        );
     }
 
     @Override
@@ -204,6 +197,23 @@ public class IcicleTridentEntity extends PersistentProjectileEntity {
         return EnchantmentHelper.hasChanneling(this.tridentStack);
     }
 
+    @Override
+    protected SoundEvent getHitSound() {
+        return SoundEvents.ITEM_TRIDENT_HIT_GROUND;
+    }
+
+    @Override
+    protected boolean tryPickup(PlayerEntity player) {
+        return super.tryPickup(player) || this.isNoClip() && this.isOwner(player) && player.getInventory().insertStack(this.asItemStack());
+    }
+
+    @Override
+    public void onPlayerCollision(PlayerEntity player) {
+        if (this.isOwner(player) || this.getOwner() == null) {
+            super.onPlayerCollision(player);
+        }
+    }
+
     public ItemStack getTridentStack() {
         return this.tridentStack;
     }
@@ -211,6 +221,19 @@ public class IcicleTridentEntity extends PersistentProjectileEntity {
     @Override
     public Packet<ClientPlayPacketListener> createSpawnPacket() {
         return new EntitySpawnS2CPacket(this);
+    }
+
+    @Override
+    public void age() {
+        int i = this.dataTracker.get(LOYALTY);
+        if (this.pickupType != PersistentProjectileEntity.PickupPermission.ALLOWED || i <= 0) {
+            super.age();
+        }
+    }
+
+    @Override
+    protected float getDragInWater() {
+        return 0.99F;
     }
 
     @Override
