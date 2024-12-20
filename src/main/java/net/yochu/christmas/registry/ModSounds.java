@@ -12,6 +12,7 @@ public class ModSounds {
     public static final SoundEvent PINECONE_LAND = registerSoundEvent("pinecone_land");
     public static final SoundEvent CHINA = registerSoundEvent("china");
     public static final SoundEvent SQUEAKY_HIT = registerSoundEvent("squeaky_hit");
+    public static final SoundEvent WHIP_CRACK = registerSoundEvent("whip_crack");
 
 
     private static SoundEvent registerSoundEvent(String name) {

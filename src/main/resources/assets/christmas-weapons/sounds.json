@@ -32,5 +32,11 @@
       "christmas-weapons:item/squeaky_hit"
     ],
     "subtitle": "sounds.christmas-weapons.squeaky_hit"
+  },
+  "whip_crack": {
+    "sounds": [
+      "christmas-weapons:item/whip_crack"
+    ],
+    "subtitle": "sounds.christmas-weapons.whip_crack"
   }
 }

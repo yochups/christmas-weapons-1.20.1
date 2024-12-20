@@ -5,7 +5,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.Vec3d;
+import net.yochu.christmas.registry.ModSounds;
 
 public class FairylightWhipItem extends SwordItem {
     private final double extendedReach;
@@ -34,6 +36,8 @@ public class FairylightWhipItem extends SwordItem {
             target.addVelocity(pullVector.x, pullVector.y, pullVector.z);
             target.velocityModified = true; // Ensure the velocity update is processed
         }
+        attacker.getWorld().playSound(null, attacker.getBlockPos(), ModSounds.WHIP_CRACK,
+                SoundCategory.PLAYERS, 1.0F, 1.0F);
 
         return super.postHit(stack, target, attacker);
     }
